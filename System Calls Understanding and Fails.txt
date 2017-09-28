@@ -1,0 +1,65 @@
+fork:
+	fork() creates a new process by duplicating the calling process.  
+	The new process is referred to as the child process.
+	return pid_t
+
+	fail condition: is  not supported on this platform 
+stat:
+	These  functions return information about a file:
+	arguments:
+		pathname:
+		buf: buffer for file
+	return int: on success a 0 and on a error a -1
+	
+	fail condition: Bad pathname.
+
+
+kill:
+	this system call can be used to send any signal to any process group or process.
+	arguments:
+		pid_t: 	if greater than 0 than the second argument is sent to the process with the id of pid_t
+			if 0 than the second argument is sent to the calling process
+			if -1 than the second argument is sent to the process the calling process has permission  
+		int:	if is 0, then no signal is sent, but error checking is still performed	
+		return int: On success (at least one signal was sent), zero is returned.  On error, -1 is returned
+
+	fail condition:An invalid signal was specified.
+
+mmap:
+	 creates a new mapping in the virtual address space of the calling process
+	arguments:
+		void* addr:addres wehre the mapping should be greated
+		size_t length:The length argument  specifies the length of the mapping.
+		int prot:argument describes the desired memory protection of the mapping 
+		int flags:argument determines whether updates to the mapping
+		int fd:
+		off_t offset:	
+	return void: 
+
+	fail condition:The file has been locked, or too much memory has been locked 
+
+chmod:
+	 system call change the permissions of a file.
+	arguments:	
+		char* pathname: pathname to the file	
+		mode_t mode: the new file permissions are specified in it 
+	return int:  On success, zero is returned.  On error, -1 is returned, and  errno  is  set  appropriately.
+	
+	fail condition: pathname points outside your accessible address space.
+
+waitpid:
+	 are used to wait for state changes in a child of the calling process, and obtain information about the child  whose  state  has  changed.
+	arguments:
+		pid_t: 
+			<-1 meaning wait for any child process whose process group ID is equal to the  absolute value of pid.
+			 -1 meaning wait for any child process.
+			  0 meaning  wait  for  any child process whose process group ID is equal to that of the calling process.
+			> 0 meaning wait for the child whose process ID is equal to the value of pid.
+		int options: is an OR of zero or more of the following constants
+		int satus: 
+	return int: on success, returns the process ID of the terminated child;  on  error, -1 is returned.
+	
+	fail condition: The options argument was invalid.
+
+
+			
